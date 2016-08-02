@@ -1,0 +1,131 @@
+Our monk loves food. Hence,he took up position of a manager at Sagar,a restaurant that serves people with delicious food packages. It is a very famous place and people are always queuing up to have one of those packages. Each package has a cost associated with it. The packages are kept as a pile. The job of a manager is very difficult. He needs to handle two types of queries:
+
+1) Customer Query:
+When a customer demands a package, the food package on the top of the pile is given and the customer is charged according to the cost of the package. This reduces the height of the pile by 1. 
+In case the pile is empty, the customer goes away empty-handed.
+
+2) Chef Query:
+The chef prepares a food package and adds it on top of the pile. And reports the cost of the package to the Manager.
+Help him manage the process.
+
+Input:
+First line contains an integer Q, the number of queries. Q lines follow.
+A Type-1 ( Customer) Query, is indicated by a single integer 1 in the line.
+A Type-2 ( Chef) Query, is indicated by two space separated integers 2 and C (cost of the package prepared) .
+
+Output:
+For each Type-1 Query, output the price that customer has to pay i.e. cost of the package given to the customer in a new line. If the pile is empty, print "No Food" (without the quotes).
+
+Constraints:
+1 ≤ Q ≤ 105
+1 ≤ C ≤ 107
+
+SAMPLE INPUT 
+6
+1
+2 5
+2 7
+2 9
+1
+1
+SAMPLE OUTPUT 
+No Food
+9
+7
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+import java.util.*;
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+      
+      Scanner sc = new Scanner(System.in);
+      
+      int Q=sc.nextInt();
+      
+      Package p = new Package(); 
+      
+      int c=0, d=0;
+      
+      for(int i =0; i<Q; i++)
+      {
+      	sc.nextLine();
+      	
+      	c=sc.nextInt();
+      	
+      	if(c==1)// customer query, pop
+      	{
+      		int x=p.pop();
+      		
+      		if(x==0)
+      			System.out.println("No Food");
+      		else
+      			System.out.println(x);
+      		
+      	}
+      	
+      	else if (c==2)
+      	{
+      		d=sc.nextInt();
+      		
+      		p.push(d);
+      		
+      	}
+      	
+      }
+      
+      
+      
+    }
+      
+ static class Package
+ {
+ 	int cost;
+ 	Package next;
+ 	Package head; 
+ 
+ 	Package()
+ 	{
+ 		head=null;
+ 		next=null;
+ 		cost=0;
+ 	}
+ 	
+ 	Package(int c)  // constructor for package with cost
+ 	{
+ 		cost=c;
+ 	}
+ 	
+ 	
+ void push(int c)   //pushing new package on top
+ {
+ 	Package p = new Package(c);
+ 
+ 	p.next=head;
+ 
+ 	head=p;
+ 	
+ }
+ 
+ 
+ int pop()  // popping out header package
+ {
+ 	if (head==null)  // if 0 return then print "no food"
+ 		return 0;
+ 		
+ 	int c=head.cost;
+ 	
+ 	head=head.next;
+ 	return c; 
+ }
+ 
+ 	
+ 	
+ 	
+ }
+      
+      
+    }
+
